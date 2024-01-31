@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+    <h1 class="text-center">User Dashboard</h1>
+
+    <div class="container">
+        <h2>Your Orders:</h2>
+        <ul class="list-group">
+            {% for order in orders %}
+            <li class="list-group-item">{{ order.dessert_name }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+</html>

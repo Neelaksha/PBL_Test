@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dessert Ordering System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+</head>
+<body>
+    <h1 class="text-center">Dessert Ordering System</h1>
+    
+    <div class="container">
+        <div class="row">
+            {% for dessert in desserts %}
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ dessert.name }}</h5>
+                        <p class="card-text">Price: ${{ dessert.price }}</p>
+                        <button class="btn btn-primary order-btn" data-dessert-id="{{ dessert.id }}">Order</button>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <a href="/login" class="btn btn-primary">Login</a>
+            </div>
+            <div class="col-md-6">
+                <a href="/dashboard" class="btn btn-primary">Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".order-btn").click(function() {
+                var dessertId = $(this).data("dessert-id");
+                $.ajax({
+                    type: "POST",
+                    url: "/order",
+                    data: { dessert_id: dessertId },
+                    success: function(response) {
+                        alert("Order placed successfully!");
+                    },
+                    error: function(error) {
+                        alert("Error placing order.");
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
